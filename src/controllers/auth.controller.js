@@ -6,6 +6,7 @@ import Role from '../models/Role';
 export const signup = async (req, res) => {
     const {username, email, password, roles} = req.body;
 
+    console.log(username, email, password, roles);
     
     //const userFound = User.find({email});
     
@@ -24,13 +25,9 @@ export const signup = async (req, res) => {
             console.error(error)
         }
         
-    }else{
-        try {
+    }else{        
             const role = await Role.findOne({name: "user"});
-            newUser.roles = [role._id];
-        } catch (error) {
-            console.error(error)
-        }        
+            newUser.roles = [role._id];        
     }
     const savedUser = await newUser.save();
     

@@ -11,4 +11,6 @@ router.post('/', [
     verifySignup.checkRolesExisted
 ], userCtrl.createUser);
 
+router.get('/', userCtrl.getUsers)
+
 export default router;

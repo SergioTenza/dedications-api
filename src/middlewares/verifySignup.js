@@ -20,7 +20,6 @@ export const checkRolesExisted = (req, res, next) => {
                 })
             }
         }        
-    }
-    
+    }    
     next();
 }
