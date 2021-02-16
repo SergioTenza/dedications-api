@@ -13,8 +13,6 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 
-var _config = _interopRequireDefault(require("../config"));
-
 var _User = _interopRequireDefault(require("../models/User"));
 
 var _Role = _interopRequireDefault(require("../models/Role"));
@@ -39,7 +37,7 @@ var verifyToken = /*#__PURE__*/function () {
             }));
 
           case 4:
-            decoded = _jsonwebtoken["default"].verify(token, _config["default"].SECRET);
+            decoded = _jsonwebtoken["default"].verify(token, process.env.SECRET);
             req.userId = decoded.id;
             _context.next = 8;
             return _User["default"].findById(req.userId, {

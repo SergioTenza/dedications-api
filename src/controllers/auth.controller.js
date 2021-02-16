@@ -1,6 +1,5 @@
 import User from '../models/User';
 import jwt from 'jsonwebtoken';
-import config from '../config';
 import Role from '../models/Role';
 
 export const signup = async (req, res) => {
@@ -33,7 +32,7 @@ export const signup = async (req, res) => {
     
     console.log(savedUser);   
 
-    const token = jwt.sign({id: savedUser._id},config.SECRET,{
+    const token = jwt.sign({id: savedUser._id},process.env.SECRET,{
         expiresIn : 86400 //1 dia en segundos
     });
     res.status(200).json({token});
@@ -48,7 +47,7 @@ export const signin = async (req, res) => {
 
     if (!matchPassword) return res.status(401).json({token: null, message: 'invalid password', status:'401'}).render('401');
     
-    const token = jwt.sign({id: userFound._id},config.SECRET,{
+    const token = jwt.sign({id: userFound._id},process.env.SECRET,{
         expiresIn: 86400// 24 Horas en segundos
     })       
     res.status(200).json({token})        

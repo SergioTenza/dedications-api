@@ -4,9 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
-var _config = _interopRequireDefault(require("./config"));
-
-_mongoose["default"].connect(_config["default"].CONNECTION_STRING, {
+_mongoose["default"].connect(process.env.CONNECTION_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: true,
