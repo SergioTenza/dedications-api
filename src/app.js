@@ -35,7 +35,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/machine', machineRoutes);
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.json({
         message: 'Bienvenido a la Api Dedications By FunPhotosSystems',
         email: 'Si quiere trabajar con nosotros pongase en contacto con tnzservicios@gmail.com'
