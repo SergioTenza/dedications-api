@@ -31,7 +31,7 @@ var app = (0, _express["default"])(); //Global Variables
 
 _dotenv["default"].config();
 
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 5001);
 (0, _initialSetup.createRoles)(); // Middlewares
 
 app.use((0, _morgan["default"])('dev'));
@@ -48,5 +48,11 @@ app.use('/api/tasks', _tasks["default"]);
 app.use('/api/auth', _auth["default"]);
 app.use('/api/users', _user["default"]);
 app.use('/api/machine', _machine["default"]);
+app.get('/', function (req, res) {
+  res.json({
+    message: 'Bienvenido a la Api Dedications By FunPhotosSystems',
+    email: 'Si quiere trabajar con nosotros pongase en contacto con tnzservicios@gmail.com'
+  });
+});
 var _default = app;
 exports["default"] = _default;
