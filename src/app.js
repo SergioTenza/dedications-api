@@ -11,6 +11,7 @@ import tasksRoutes from './routes/tasks.routes';
 import authRoutes from './routes/auth.routes';
 import usersRoutes from './routes/user.routes';
 import machineRoutes from './routes/machine.routes';
+import factsRoutes from './routes/facturacion.routes';
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use('/api/tasks', tasksRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/machine', machineRoutes);
+app.use('/api/fact', factsRoutes);
 
 app.get('/api', (req, res) => {
     res.json({

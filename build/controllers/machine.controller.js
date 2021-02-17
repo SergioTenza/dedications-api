@@ -9,21 +9,25 @@ exports.deleteMachineById = exports.updateMachineById = exports.getMachineById =
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
-var _objectDestructuringEmpty2 = _interopRequireDefault(require("@babel/runtime/helpers/objectDestructuringEmpty"));
-
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _Task = _interopRequireDefault(require("../models/Task"));
+var _Machine = _interopRequireDefault(require("../models/Machine"));
 
 var createMachine = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
-    var newMachine, machineSaved;
+    var _req$body, name, location, user, tasks, newMachine, machineSaved;
+
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            (0, _objectDestructuringEmpty2["default"])(req.body);
-            newMachine = new _Task["default"]({});
+            _req$body = req.body, name = _req$body.name, location = _req$body.location, user = _req$body.user, tasks = _req$body.tasks;
+            newMachine = new _Machine["default"]({
+              name: name,
+              location: location,
+              user: user,
+              tasks: tasks
+            });
             _context.next = 4;
             return newMachine.save();
 
@@ -54,7 +58,7 @@ var getMachines = /*#__PURE__*/function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return Machine.find();
+            return _Machine["default"].find();
 
           case 2:
             machines = _context2.sent;
@@ -83,7 +87,7 @@ var getMachineById = /*#__PURE__*/function () {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
-            return Machine.findById(req.params.machineId);
+            return _Machine["default"].findById(req.params.machineId);
 
           case 2:
             machine = _context3.sent;
@@ -112,7 +116,7 @@ var updateMachineById = /*#__PURE__*/function () {
         switch (_context4.prev = _context4.next) {
           case 0:
             _context4.next = 2;
-            return Machine.findByIdAndUpdate(req.params.machineId, req.body, {
+            return _Machine["default"].findByIdAndUpdate(req.params.machineId, req.body, {
               "new": true
             });
 
@@ -144,7 +148,7 @@ var deleteMachineById = /*#__PURE__*/function () {
           case 0:
             machineId = req.params.machineId;
             _context5.next = 3;
-            return Machine.findByIdAndDelete(machineId);
+            return _Machine["default"].findByIdAndDelete(machineId);
 
           case 3:
             res.status(204).json({

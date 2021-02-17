@@ -15,8 +15,8 @@ var _middlewares = require("../middlewares");
 
 var router = (0, _express.Router)();
 router.post('/', [_middlewares.authJwt.verifyToken, _middlewares.authJwt.isCustomer], tasksCtrl.createTask);
-router.get('/', tasksCtrl.getTasks);
-router.get('/:taskId', tasksCtrl.getTaskById);
+router.get('/', _middlewares.authJwt.verifyToken, tasksCtrl.getTasks);
+router.get('/:taskId', _middlewares.authJwt.verifyToken, tasksCtrl.getTaskById);
 router.put('/:taskId', [_middlewares.authJwt.verifyToken, _middlewares.authJwt.isCustomer], tasksCtrl.updateTaskById);
 router["delete"]('/:taskId', [_middlewares.authJwt.verifyToken, _middlewares.authJwt.isCustomer], tasksCtrl.deleteTaskById);
 var _default = router;

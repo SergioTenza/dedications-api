@@ -27,6 +27,8 @@ var _user = _interopRequireDefault(require("./routes/user.routes"));
 
 var _machine = _interopRequireDefault(require("./routes/machine.routes"));
 
+var _facturacion = _interopRequireDefault(require("./routes/facturacion.routes"));
+
 var app = (0, _express["default"])(); //Global Variables
 
 _dotenv["default"].config();
@@ -48,7 +50,8 @@ app.use('/api/tasks', _tasks["default"]);
 app.use('/api/auth', _auth["default"]);
 app.use('/api/users', _user["default"]);
 app.use('/api/machine', _machine["default"]);
-app.get('/', function (req, res) {
+app.use('/api/fact', _facturacion["default"]);
+app.get('/api', function (req, res) {
   res.json({
     message: 'Bienvenido a la Api Dedications By FunPhotosSystems',
     email: 'Si quiere trabajar con nosotros pongase en contacto con tnzservicios@gmail.com'

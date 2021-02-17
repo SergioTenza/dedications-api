@@ -9,15 +9,15 @@ exports["default"] = void 0;
 
 var _express = require("express");
 
-var machineCtrl = _interopRequireWildcard(require("../controllers/tasks.controller"));
+var machineCtrl = _interopRequireWildcard(require("../controllers/machine.controller"));
 
 var _middlewares = require("../middlewares");
 
 var router = (0, _express.Router)();
-router.post('/', [_middlewares.authJwt.verifyToken, _middlewares.authJwt.isAdmin], machineCtrl.createTask);
-router.get('/', machineCtrl.getTasks);
-router.get('/:taskId', machineCtrl.getTaskById);
-router.put('/:taskId', [_middlewares.authJwt.verifyToken, _middlewares.authJwt.isAdmin], machineCtrl.updateTaskById);
-router["delete"]('/:taskId', [_middlewares.authJwt.verifyToken, _middlewares.authJwt.isAdmin], machineCtrl.deleteTaskById);
+router.post('/', [_middlewares.authJwt.verifyToken, _middlewares.authJwt.isAdmin], machineCtrl.createMachine);
+router.get('/', _middlewares.authJwt.verifyToken, machineCtrl.getMachines);
+router.get('/:machineId', _middlewares.authJwt.verifyToken, machineCtrl.getMachineById);
+router.put('/:machineId', [_middlewares.authJwt.verifyToken, _middlewares.authJwt.isAdmin], machineCtrl.updateMachineById);
+router["delete"]('/:machineId', [_middlewares.authJwt.verifyToken, _middlewares.authJwt.isAdmin], machineCtrl.deleteMachineById);
 var _default = router;
 exports["default"] = _default;

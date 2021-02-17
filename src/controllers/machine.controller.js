@@ -1,8 +1,9 @@
-import Task from '../models/Task'
+import Machine from '../models/Machine'
 
 export const createMachine = async (req, res) => {
-    const {} = req.body
-    const newMachine = new Task({});
+    const {name,location, user,tasks} = req.body
+    const newMachine = new Machine({name, location, user, tasks
+    });
     const machineSaved = await newMachine.save();
     res.status(201).json(machineSaved);
 }
