@@ -3,6 +3,7 @@ import path from 'path';
 import morgan from'morgan';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import cors from 'cors'
 
 
 import {createRoles} from './libs/initialSetup';
@@ -21,6 +22,7 @@ app.set('port', process.env.PORT || 5001);
 
 
 createRoles();
+app.use(cors());
 // Middlewares
 app.use(morgan('dev'));
 app.use(express.json());
