@@ -39,16 +39,20 @@ export const signup = async (req, res) => {
 };
 export const signin = async (req, res) => {
     
-    const userFound = await User.findOne({email: req.body.email}).populate("roles")
+    try {
+        const userFound = await User.findOne({email: req.body.email}).populate("roles")
     
-    if (!userFound) return res.status(400).render('400',{message:'usuario no encontrado o inexistente', status:'400'});
+        if (!userFound) return res.status(400).render('400',{message:'usuario no encontrado o inexistente', status:'400'});
 
-    const matchPassword = await User.comparePassword(req.body.password, userFound.password)
+        const matchPassword = await User.comparePassword(req.body.password, userFound.password)
 
-    if (!matchPassword) return res.status(401).json({token: null, message: 'invalid password', status:'401'}).render('401');
-    
-    const token = jwt.sign({id: userFound._id},process.env.SECRET,{
-        expiresIn: 86400// 24 Horas en segundos
-    })       
-    res.status(200).json({token})        
+        if (!matchPassword) return res.status(401).json({token: null, message: 'invalid password', status:'401'}).render('401');
+        
+        const token = jwt.sign({id: userFound._id},process.env.SECRET,{
+            expiresIn: 86400// 24 Horas en segundos
+        })       
+        res.status(200).json({token})
+    } catch (error) {
+        res.status(500).json(error)    
+    }        
 };
