@@ -10,8 +10,8 @@ const machineSchema = new Schema({
     tasks:[{
         ref :"Task",
         type: Schema.Types.ObjectId
-    }]
-
+    }],
+    status: String
 },{
     versionKey: false
 });

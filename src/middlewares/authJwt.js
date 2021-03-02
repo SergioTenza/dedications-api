@@ -31,7 +31,7 @@ export const isCustomer = async (req, res, next) => {
             return;
         }               
     }
-    return res.status(403).json({message: 'Requires moderator role'});    
+    return res.status(403).json({message: 'Requires customer role'});    
 }
 
 export const isAdmin = async (req, res, next) => {    
