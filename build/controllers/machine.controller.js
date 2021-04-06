@@ -15,18 +15,20 @@ var _Machine = _interopRequireDefault(require("../models/Machine"));
 
 var createMachine = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
-    var _req$body, name, location, user, tasks, newMachine, machineSaved;
+    var _req$body, name, location, user, tasks, status, newMachine, machineSaved;
 
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _req$body = req.body, name = _req$body.name, location = _req$body.location, user = _req$body.user, tasks = _req$body.tasks;
+            _req$body = req.body, name = _req$body.name, location = _req$body.location, user = _req$body.user, tasks = _req$body.tasks, status = _req$body.status;
             newMachine = new _Machine["default"]({
               name: name,
               location: location,
               user: user,
-              tasks: tasks
+              tasks: tasks,
+              status: status,
+              privateid: privateid
             });
             _context.next = 4;
             return newMachine.save();

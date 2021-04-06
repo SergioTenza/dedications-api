@@ -127,7 +127,7 @@ var isCustomer = /*#__PURE__*/function () {
 
           case 14:
             return _context2.abrupt("return", res.status(403).json({
-              message: 'Requires moderator role'
+              message: 'Requires customer role'
             }));
 
           case 15:

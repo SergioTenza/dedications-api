@@ -8,7 +8,7 @@ exports["default"] = void 0;
 var _mongoose = require("mongoose");
 
 var taskSchema = new _mongoose.Schema({
-  Inicio: String,
+  inicio: String,
   duracion: String,
   logo: String,
   skin: String,

@@ -15,21 +15,24 @@ var _Task = _interopRequireDefault(require("../models/Task"));
 
 var createTask = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
-    var _req$body, fecha, horaInicio, horaFinal, logo, skin, tema, texto, newTask, taskSaved;
+    var _req$body, inicio, duracion, logo, skin, tema, texto, urls, machine, user, mesas, newTask, taskSaved;
 
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _req$body = req.body, fecha = _req$body.fecha, horaInicio = _req$body.horaInicio, horaFinal = _req$body.horaFinal, logo = _req$body.logo, skin = _req$body.skin, tema = _req$body.tema, texto = _req$body.texto;
+            _req$body = req.body, inicio = _req$body.inicio, duracion = _req$body.duracion, logo = _req$body.logo, skin = _req$body.skin, tema = _req$body.tema, texto = _req$body.texto, urls = _req$body.urls, machine = _req$body.machine, user = _req$body.user, mesas = _req$body.mesas;
             newTask = new _Task["default"]({
-              fecha: fecha,
-              horaInicio: horaInicio,
-              horaFinal: horaFinal,
+              inicio: inicio,
+              duracion: duracion,
               logo: logo,
               skin: skin,
               tema: tema,
-              texto: texto
+              texto: texto,
+              urls: urls,
+              machine: machine,
+              user: user,
+              mesas: mesas
             });
             _context.next = 4;
             return newTask.save();

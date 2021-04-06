@@ -16,5 +16,6 @@ var _middlewares = require("../middlewares");
 var router = (0, _express.Router)();
 router.post('/signup', [_middlewares.authJwt.verifyToken, _middlewares.authJwt.isAdmin, _middlewares.verifySignup.checkDuplicateUsernameOrEmail, _middlewares.verifySignup.checkRolesExisted], authCtrl.signup);
 router.post('/signin', authCtrl.signin);
+router.get('/logout', authCtrl.logout);
 var _default = router;
 exports["default"] = _default;

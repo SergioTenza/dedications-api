@@ -9,6 +9,7 @@ var _mongoose = require("mongoose");
 
 var machineSchema = new _mongoose.Schema({
   name: String,
+  privateid: String,
   location: String,
   user: {
     ref: "User",
@@ -17,7 +18,8 @@ var machineSchema = new _mongoose.Schema({
   tasks: [{
     ref: "Task",
     type: _mongoose.Schema.Types.ObjectId
-  }]
+  }],
+  status: String
 }, {
   versionKey: false
 });

@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.signin = exports.signup = void 0;
+exports.signin = exports.logout = exports.signup = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -115,23 +115,24 @@ var signup = /*#__PURE__*/function () {
 
 exports.signup = signup;
 
-var signin = /*#__PURE__*/function () {
+var logout = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var userFound, matchPassword, token;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.next = 2;
+            _context2.prev = 0;
+            _context2.next = 3;
             return _User["default"].findOne({
               email: req.body.email
             }).populate("roles");
 
-          case 2:
+          case 3:
             userFound = _context2.sent;
 
             if (userFound) {
-              _context2.next = 5;
+              _context2.next = 6;
               break;
             }
 
@@ -140,15 +141,15 @@ var signin = /*#__PURE__*/function () {
               status: '400'
             }));
 
-          case 5:
-            _context2.next = 7;
+          case 6:
+            _context2.next = 8;
             return _User["default"].comparePassword(req.body.password, userFound.password);
 
-          case 7:
+          case 8:
             matchPassword = _context2.sent;
 
             if (matchPassword) {
-              _context2.next = 10;
+              _context2.next = 11;
               break;
             }
 
@@ -158,7 +159,84 @@ var signin = /*#__PURE__*/function () {
               status: '401'
             }).render('401'));
 
-          case 10:
+          case 11:
+            token = _jsonwebtoken["default"].sign({
+              id: userFound._id
+            }, process.env.SECRET, {
+              expiresIn: 1 // 24 Horas en segundos
+
+            });
+            res.status(200).json({
+              Message: 'Logout successful.'
+            });
+            _context2.next = 18;
+            break;
+
+          case 15:
+            _context2.prev = 15;
+            _context2.t0 = _context2["catch"](0);
+            res.status(500).json(_context2.t0);
+
+          case 18:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 15]]);
+  }));
+
+  return function logout(_x3, _x4) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+exports.logout = logout;
+
+var signin = /*#__PURE__*/function () {
+  var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
+    var userFound, matchPassword, token;
+    return _regenerator["default"].wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return _User["default"].findOne({
+              email: req.body.email
+            }).populate("roles");
+
+          case 3:
+            userFound = _context3.sent;
+
+            if (userFound) {
+              _context3.next = 6;
+              break;
+            }
+
+            return _context3.abrupt("return", res.status(400).render('400', {
+              message: 'usuario no encontrado o inexistente',
+              status: '400'
+            }));
+
+          case 6:
+            _context3.next = 8;
+            return _User["default"].comparePassword(req.body.password, userFound.password);
+
+          case 8:
+            matchPassword = _context3.sent;
+
+            if (matchPassword) {
+              _context3.next = 11;
+              break;
+            }
+
+            return _context3.abrupt("return", res.status(401).json({
+              token: null,
+              message: 'invalid password',
+              status: '401'
+            }).render('401'));
+
+          case 11:
             token = _jsonwebtoken["default"].sign({
               id: userFound._id
             }, process.env.SECRET, {
@@ -168,17 +246,24 @@ var signin = /*#__PURE__*/function () {
             res.status(200).json({
               token: token
             });
+            _context3.next = 18;
+            break;
 
-          case 12:
+          case 15:
+            _context3.prev = 15;
+            _context3.t0 = _context3["catch"](0);
+            res.status(500).json(_context3.t0);
+
+          case 18:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
       }
-    }, _callee2);
+    }, _callee3, null, [[0, 15]]);
   }));
 
-  return function signin(_x3, _x4) {
-    return _ref2.apply(this, arguments);
+  return function signin(_x5, _x6) {
+    return _ref3.apply(this, arguments);
   };
 }();
 
