@@ -2,7 +2,7 @@ import Machine from '../models/Machine'
 
 export const createMachine = async (req, res) => {
     const {name,location, user,tasks,status} = req.body
-    const newMachine = new Machine({name, location, user, tasks,status
+    const newMachine = new Machine({name, location, user, tasks,status,privateid
     });
     const machineSaved = await newMachine.save();
     res.status(201).json(machineSaved);

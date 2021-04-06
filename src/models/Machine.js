@@ -2,6 +2,7 @@ import {Schema, model} from 'mongoose';
 
 const machineSchema = new Schema({
     name: String,
+    privateid: String,
     location: String,
     user: {
         ref :"User",

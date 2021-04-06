@@ -7,5 +7,6 @@ import {authJwt} from '../middlewares'
 
 router.post('/signup', [authJwt.verifyToken, authJwt.isAdmin, verifySignup.checkDuplicateUsernameOrEmail, verifySignup.checkRolesExisted], authCtrl.signup);
 router.post('/signin', authCtrl.signin);
+router.get('/logout', authCtrl.logout);
 
 export default router;

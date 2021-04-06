@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose';
 
 const taskSchema = new Schema({    
-    Inicio: String,
+    inicio: String,
     duracion: String,
     logo: String,
     skin: String,

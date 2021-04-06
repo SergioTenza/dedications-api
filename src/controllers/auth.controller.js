@@ -37,6 +37,27 @@ export const signup = async (req, res) => {
     });
     res.status(200).json({token});
 };
+
+export const logout = async (req, res) => {
+    try {
+        const userFound = await User.findOne({email: req.body.email}).populate("roles")
+    
+        if (!userFound) return res.status(400).render('400',{message:'usuario no encontrado o inexistente', status:'400'});
+
+        const matchPassword = await User.comparePassword(req.body.password, userFound.password)
+
+        if (!matchPassword) return res.status(401).json({token: null, message: 'invalid password', status:'401'}).render('401');
+        
+        const token = jwt.sign({id: userFound._id},process.env.SECRET,{
+            expiresIn: 1// 24 Horas en segundos
+        })       
+        res.status(200).json({Message: 'Logout successful.'})
+    } catch (error) {
+        res.status(500).json(error)    
+    }        
+    
+};
+
 export const signin = async (req, res) => {
     
     try {

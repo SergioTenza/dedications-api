@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'path';
 import morgan from'morgan';
-import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import cors from 'cors'
 
@@ -26,11 +25,7 @@ app.use(cors());
 // Middlewares
 app.use(morgan('dev'));
 app.use(express.json());
-// for parsing application/json
-app.use(bodyParser.json());
-// for parsing application/xwww-
-//app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.urlencoded({ extended: false })); 
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/tasks', tasksRoutes);

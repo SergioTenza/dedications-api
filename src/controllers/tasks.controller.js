@@ -1,8 +1,8 @@
 import Task from '../models/Task'
 
 export const createTask = async (req, res) => {
-    const {fecha, horaInicio, horaFinal, logo, skin, tema, texto} = req.body
-    const newTask = new Task({fecha, horaInicio, horaFinal, logo, skin, tema, texto});
+    const {inicio, duracion, logo, skin, tema, texto, urls, machine, user,mesas} = req.body
+    const newTask = new Task({inicio, duracion, logo, skin, tema, texto, urls, machine, user,mesas});
     const taskSaved = await newTask.save();
     res.status(201).json(taskSaved);
 }
