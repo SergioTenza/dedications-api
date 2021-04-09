@@ -15,6 +15,7 @@ export const getTaskById = async (req, res) => {
     res.status(200).json(task);
 }
 export const updateTaskById = async (req, res) => {
+    console.log(req.body);
     const updatedTask = await Task.findByIdAndUpdate(req.params.taskId, req.body, {
         new: true
     });

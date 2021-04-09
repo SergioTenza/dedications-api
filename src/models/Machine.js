@@ -4,10 +4,10 @@ const machineSchema = new Schema({
     name: String,
     privateid: String,
     location: String,
-    user: {
+    user: [{
         ref :"User",
         type: Schema.Types.ObjectId
-    },
+    }],
     tasks:[{
         ref :"Task",
         type: Schema.Types.ObjectId
