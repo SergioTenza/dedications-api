@@ -121,16 +121,17 @@ var updateTaskById = /*#__PURE__*/function () {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            _context4.next = 2;
+            console.log(req.body);
+            _context4.next = 3;
             return _Task["default"].findByIdAndUpdate(req.params.taskId, req.body, {
               "new": true
             });
 
-          case 2:
+          case 3:
             updatedTask = _context4.sent;
             res.status(200).json(updatedTask);
 
-          case 4:
+          case 5:
           case "end":
             return _context4.stop();
         }

@@ -11,10 +11,10 @@ var machineSchema = new _mongoose.Schema({
   name: String,
   privateid: String,
   location: String,
-  user: {
+  user: [{
     ref: "User",
     type: _mongoose.Schema.Types.ObjectId
-  },
+  }],
   tasks: [{
     ref: "Task",
     type: _mongoose.Schema.Types.ObjectId

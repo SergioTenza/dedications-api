@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.signin = exports.logout = exports.signup = void 0;
+exports.login = exports.logout = exports.signin = exports.signup = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -115,7 +115,7 @@ var signup = /*#__PURE__*/function () {
 
 exports.signup = signup;
 
-var logout = /*#__PURE__*/function () {
+var signin = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var userFound, matchPassword, token;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
@@ -163,11 +163,11 @@ var logout = /*#__PURE__*/function () {
             token = _jsonwebtoken["default"].sign({
               id: userFound._id
             }, process.env.SECRET, {
-              expiresIn: 1 // 24 Horas en segundos
+              expiresIn: 86400 // 24 Horas en segundos
 
             });
             res.status(200).json({
-              Message: 'Logout successful.'
+              token: token
             });
             _context2.next = 18;
             break;
@@ -185,14 +185,14 @@ var logout = /*#__PURE__*/function () {
     }, _callee2, null, [[0, 15]]);
   }));
 
-  return function logout(_x3, _x4) {
+  return function signin(_x3, _x4) {
     return _ref2.apply(this, arguments);
   };
 }();
 
-exports.logout = logout;
+exports.signin = signin;
 
-var signin = /*#__PURE__*/function () {
+var logout = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
     var userFound, matchPassword, token;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
@@ -240,11 +240,11 @@ var signin = /*#__PURE__*/function () {
             token = _jsonwebtoken["default"].sign({
               id: userFound._id
             }, process.env.SECRET, {
-              expiresIn: 86400 // 24 Horas en segundos
+              expiresIn: 1 // 1 milisegundo
 
             });
             res.status(200).json({
-              token: token
+              message: 'Logout successful.'
             });
             _context3.next = 18;
             break;
@@ -262,9 +262,88 @@ var signin = /*#__PURE__*/function () {
     }, _callee3, null, [[0, 15]]);
   }));
 
-  return function signin(_x5, _x6) {
+  return function logout(_x5, _x6) {
     return _ref3.apply(this, arguments);
   };
 }();
 
-exports.signin = signin;
+exports.logout = logout;
+
+var login = /*#__PURE__*/function () {
+  var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
+    var userFound, matchPassword, token;
+    return _regenerator["default"].wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            _context4.next = 3;
+            return _User["default"].findOne({
+              email: req.body.email
+            }).populate("roles");
+
+          case 3:
+            userFound = _context4.sent;
+
+            if (userFound) {
+              _context4.next = 6;
+              break;
+            }
+
+            return _context4.abrupt("return", res.status(400).render('400', {
+              message: 'usuario no encontrado o inexistente',
+              status: '400'
+            }));
+
+          case 6:
+            _context4.next = 8;
+            return _User["default"].comparePassword(req.body.password, userFound.password);
+
+          case 8:
+            matchPassword = _context4.sent;
+
+            if (matchPassword) {
+              _context4.next = 11;
+              break;
+            }
+
+            return _context4.abrupt("return", res.status(401).json({
+              token: null,
+              message: 'invalid password',
+              status: '401'
+            }).render('401'));
+
+          case 11:
+            token = _jsonwebtoken["default"].sign({
+              id: userFound._id
+            }, process.env.SECRET, {
+              expiresIn: 86400 // 24 Horas en segundos
+
+            });
+            res.status(200).json({
+              token: token,
+              "username": userFound.username,
+              "id": userFound._id
+            });
+            _context4.next = 18;
+            break;
+
+          case 15:
+            _context4.prev = 15;
+            _context4.t0 = _context4["catch"](0);
+            res.status(500).json(_context4.t0);
+
+          case 18:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, null, [[0, 15]]);
+  }));
+
+  return function login(_x7, _x8) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+exports.login = login;
