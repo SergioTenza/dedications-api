@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getAgendaById = exports.getAgenda = void 0;
+exports.getAgendaByMachineId = exports.getAgendaById = exports.getAgenda = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -14,6 +14,8 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _Agenda = _interopRequireDefault(require("../models/Agenda"));
 
 var _Task = _interopRequireDefault(require("../models/Task"));
+
+var _Machine = _interopRequireDefault(require("../models/Machine"));
 
 var getAgenda = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
@@ -67,7 +69,7 @@ var getAgendaById = /*#__PURE__*/function () {
           case 3:
             fullAgenda = _context2.sent;
             fullAgenda.filter(function (item) {
-              item.Machine === req.params.machineId;
+              item.User === req.params.userId;
             });
             res.status(200).json(fullAgenda);
             _context2.next = 12;
@@ -93,3 +95,44 @@ var getAgendaById = /*#__PURE__*/function () {
 }();
 
 exports.getAgendaById = getAgendaById;
+
+var getAgendaByMachineId = /*#__PURE__*/function () {
+  var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
+    var fullAgenda;
+    return _regenerator["default"].wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return _Task["default"].find();
+
+          case 3:
+            fullAgenda = _context3.sent;
+            fullAgenda.filter(function (item) {
+              item.Machine === req.params.machineId;
+            });
+            res.status(200).json(fullAgenda);
+            _context3.next = 12;
+            break;
+
+          case 8:
+            _context3.prev = 8;
+            _context3.t0 = _context3["catch"](0);
+            res.status(500).json(_context3.t0);
+            return _context3.abrupt("return");
+
+          case 12:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[0, 8]]);
+  }));
+
+  return function getAgendaByMachineId(_x5, _x6) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+exports.getAgendaByMachineId = getAgendaByMachineId;

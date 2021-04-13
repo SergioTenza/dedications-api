@@ -15,6 +15,7 @@ var _middlewares = require("../middlewares");
 
 var router = (0, _express.Router)();
 router.get('/', _middlewares.authJwt.verifyToken, _middlewares.authJwt.isAdmin, agendaCtrl.getAgenda);
-router.get('/:machineId', _middlewares.authJwt.verifyToken, _middlewares.authJwt.isAdmin, agendaCtrl.getAgendaById);
+router.get('/:userId', _middlewares.authJwt.verifyToken, _middlewares.authJwt.isCustomer, agendaCtrl.getAgendaById);
+router.get('/maquina/:machineId', _middlewares.authJwt.verifyToken, _middlewares.authJwt.isCustomer, agendaCtrl.getAgendaByMachineId);
 var _default = router;
 exports["default"] = _default;
