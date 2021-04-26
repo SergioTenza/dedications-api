@@ -2,7 +2,8 @@ import express from 'express';
 import path from 'path';
 import morgan from'morgan';
 import dotenv from 'dotenv';
-import cors from 'cors'
+import cors from 'cors';
+import helmet from 'helmet';
 
 
 import {createRoles} from './libs/initialSetup';
@@ -28,6 +29,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet());
 
 app.use('/api/tasks', tasksRoutes);
 app.use('/api/auth', authRoutes);
