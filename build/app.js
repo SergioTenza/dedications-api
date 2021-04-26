@@ -17,6 +17,8 @@ var _dotenv = _interopRequireDefault(require("dotenv"));
 
 var _cors = _interopRequireDefault(require("cors"));
 
+var _helmet = _interopRequireDefault(require("helmet"));
+
 var _initialSetup = require("./libs/initialSetup");
 
 var _tasks = _interopRequireDefault(require("./routes/tasks.routes"));
@@ -45,6 +47,7 @@ app.use(_express["default"].urlencoded({
   extended: false
 }));
 app.use(_express["default"]["static"](_path["default"].join(__dirname, 'public')));
+app.use((0, _helmet["default"])());
 app.use('/api/tasks', _tasks["default"]);
 app.use('/api/auth', _auth["default"]);
 app.use('/api/users', _user["default"]);
