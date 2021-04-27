@@ -13,11 +13,7 @@ export const getAgenda = async (req, res) => {
 }
 export const getAgendaById = async (req, res) => {
     try {
-        const fullAgenda = await Task.find();
-        
-        fullAgenda.filter( item => {
-            item.User === req.params.userId                     
-        });
+        const fullAgenda = await Task.find({'user': req.params.userId});        
         res.status(200).json(fullAgenda);    
         
     } catch (error) {
@@ -28,11 +24,7 @@ export const getAgendaById = async (req, res) => {
 
 export const getAgendaByMachineId = async (req, res) => {
     try {
-        const fullAgenda = await Task.find();
-        
-        fullAgenda.filter( item => {
-            item.Machine === req.params.machineId                     
-        });
+        const fullAgenda = await Task.find({'machine': req.params.machineId});
         res.status(200).json(fullAgenda);    
         
     } catch (error) {
