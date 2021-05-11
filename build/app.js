@@ -19,10 +19,6 @@ var _cors = _interopRequireDefault(require("cors"));
 
 var _helmet = _interopRequireDefault(require("helmet"));
 
-var _swaggerJsdoc = _interopRequireDefault(require("swagger-jsdoc"));
-
-var _swaggerUiExpress = _interopRequireDefault(require("swagger-ui-express"));
-
 var _initialSetup = require("./libs/initialSetup");
 
 var _tasks = _interopRequireDefault(require("./routes/tasks.routes"));
@@ -43,31 +39,6 @@ _dotenv["default"].config();
 
 app.set('port', process.env.PORT || 5001);
 (0, _initialSetup.createRoles)();
-var options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Dedications API con Swagger",
-      version: "0.1.0",
-      description: "Dedications CRUD API application hecha con Express y documentada con Swagger",
-      license: {
-        name: "MIT",
-        url: "https://spdx.org/licenses/MIT.html"
-      },
-      contact: {
-        name: "Sergio",
-        url: "https://sergiotenza.github.io/",
-        email: "tnzservicios@gmail.com"
-      }
-    },
-    servers: [{
-      url: "http://localhost:3000/api"
-    }]
-  },
-  apis: ["./routes/tasks.routes.js"]
-};
-var specs = (0, _swaggerJsdoc["default"])(options);
-app.use("/api-docs", _swaggerUiExpress["default"].serve, _swaggerUiExpress["default"].setup(specs));
 app.use((0, _cors["default"])()); // Middlewares
 
 app.use((0, _morgan["default"])('dev'));

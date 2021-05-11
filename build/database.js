@@ -7,7 +7,7 @@ var _mongoose = _interopRequireDefault(require("mongoose"));
 _mongoose["default"].connect(process.env.CONNECTION_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: true,
+  useFindAndModify: false,
   useCreateIndex: true
 }).then(function (db) {
   return console.log('DB is connected');
