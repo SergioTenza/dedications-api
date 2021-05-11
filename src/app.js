@@ -4,6 +4,8 @@ import morgan from'morgan';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
 
 import {createRoles} from './libs/initialSetup';
@@ -20,9 +22,14 @@ const app = express();
 //Global Variables
 dotenv.config();
 app.set('port', process.env.PORT || 5001);
-
-
 createRoles();
+
+const specs = require('./openapi.json');
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(specs, {explorer: true})
+);
 app.use(cors());
 // Middlewares
 app.use(morgan('dev'));

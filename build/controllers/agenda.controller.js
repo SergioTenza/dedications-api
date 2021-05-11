@@ -64,29 +64,28 @@ var getAgendaById = /*#__PURE__*/function () {
           case 0:
             _context2.prev = 0;
             _context2.next = 3;
-            return _Task["default"].find();
+            return _Task["default"].find({
+              'user': req.params.userId
+            });
 
           case 3:
             fullAgenda = _context2.sent;
-            fullAgenda.filter(function (item) {
-              item.User === req.params.userId;
-            });
             res.status(200).json(fullAgenda);
-            _context2.next = 12;
+            _context2.next = 11;
             break;
 
-          case 8:
-            _context2.prev = 8;
+          case 7:
+            _context2.prev = 7;
             _context2.t0 = _context2["catch"](0);
             res.status(500).json(_context2.t0);
             return _context2.abrupt("return");
 
-          case 12:
+          case 11:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 8]]);
+    }, _callee2, null, [[0, 7]]);
   }));
 
   return function getAgendaById(_x3, _x4) {
@@ -105,29 +104,28 @@ var getAgendaByMachineId = /*#__PURE__*/function () {
           case 0:
             _context3.prev = 0;
             _context3.next = 3;
-            return _Task["default"].find();
+            return _Task["default"].find({
+              'machine': req.params.machineId
+            });
 
           case 3:
             fullAgenda = _context3.sent;
-            fullAgenda.filter(function (item) {
-              item.Machine === req.params.machineId;
-            });
             res.status(200).json(fullAgenda);
-            _context3.next = 12;
+            _context3.next = 11;
             break;
 
-          case 8:
-            _context3.prev = 8;
+          case 7:
+            _context3.prev = 7;
             _context3.t0 = _context3["catch"](0);
             res.status(500).json(_context3.t0);
             return _context3.abrupt("return");
 
-          case 12:
+          case 11:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[0, 8]]);
+    }, _callee3, null, [[0, 7]]);
   }));
 
   return function getAgendaByMachineId(_x5, _x6) {

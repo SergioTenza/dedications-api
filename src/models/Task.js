@@ -7,6 +7,8 @@ const taskSchema = new Schema({
     skin: String,
     tema: String,
     texto: String,
+    estado: String,
+    ejecucion: Number,
     urls: [String],
     machine:{
         ref :"Machine",
